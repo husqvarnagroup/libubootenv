@@ -87,6 +87,7 @@ int main (int argc, char **argv) {
 	bool noheader = false;
 	bool default_used = false;
 	struct uboot_version_info *version;
+	bool printed = false;
 
 	/*
 	 * As old tool, there is just a tool with symbolic link
@@ -175,11 +176,18 @@ int main (int argc, char **argv) {
 		} else {
 			for (i = 0; i < argc; i++) {
 				value = libuboot_get_env(ctx, argv[i]);
+				if (!value) {
+					fprintf(stderr, "Error: \"%s\" not defined\n", argv[i]);
+					continue;
+				}
 				if (noheader)
 					fprintf(stdout, "%s\n", value ? value : "");
 				else
 					fprintf(stdout, "%s=%s\n", argv[i], value ? value : "");
+				printed = true;
 			}
+			if (!printed)
+				exit (1);
 		}
 	} else { /* setenv branch */
 		bool need_store = false;
