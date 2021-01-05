@@ -1164,7 +1164,7 @@ int libuboot_load_file(struct uboot_ctx *ctx, const char *filename)
 		if (len == 0 || buf[0] == '#')
 			continue;
 
-		value = strchr(buf, '=');
+		value = strchr(buf, ' ');
 		if (!value)
 			continue;
 
