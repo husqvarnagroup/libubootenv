@@ -19,6 +19,7 @@ ADD_LIBRARY(ubootenv_static STATIC ${libubootenv_SOURCES} ${include_HEADERS})
 SET_TARGET_PROPERTIES(ubootenv_static PROPERTIES OUTPUT_NAME ubootenv)
 add_executable(fw_printenv fw_printenv.c)
 add_executable(fw_setenv fw_setenv.c)
+target_link_libraries(ubootenv z)
 target_link_libraries(fw_printenv ubootenv z)
 target_link_libraries(fw_setenv ubootenv z)
 
