@@ -766,7 +766,8 @@ static int libuboot_load(struct uboot_ctx *ctx)
 	return ctx->valid ? 0 : -ENODATA;
 }
 
-#define LINE_LENGTH 2048
+/* Our certs are up to 2k, even when stripped. 10 kB should be very safe. */
+#define LINE_LENGTH 10240
 int libuboot_load_file(struct uboot_ctx *ctx, const char *filename)
 {
 	FILE *fp;
