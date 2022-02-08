@@ -1524,7 +1524,8 @@ cleanup:
 	return status;
 }
 
-#define LINE_LENGTH 1024
+/* Our certs are up to 2k, even when stripped. 10 kB should be very safe. */
+#define LINE_LENGTH 10240
 int libuboot_load_file(struct uboot_ctx *ctx, const char *filename)
 {
 	FILE *fp;
